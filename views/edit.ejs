@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>inventorys</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            function goBack() { window.history.back();}
+            </script>
+    <style>
+        .container {
+        padding: 50px;
+        background-color:#99ccFF;
+        }
+    </style>
+    </style>        
+    </head>
+    <body>
+        <div class="jumbotron text-center">
+            <h1>Update inventory : <%= inventory.name %> </h1>
+            <p ></p>Owner: <%= inventory.owner %></p><br>
+        </div>
+        <div class="container">
+            <form action="/update" method="POST" enctype="multipart/form-data">
+                <!--the enctype attribute is required for a file upload control form-->
+                <!--the attribute is not encoding characters-->
+                <label for="name">Name*:</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Name" value= <% if (inventory.name) { %><%= inventory.name %><% } %>> <br>
+
+                <label for="inv_type">Website:</label>
+                <input type="text" id="inv_type" name="inv_type" class="form-control" placeholder="inv_type" value = <% if (inventory.inv_type) { %><%= inventory.inv_type %><% } %>><br>
+                
+                <label for="quantity">Quantity:</label>
+                <input type="text" id="quantity" name="quantity" class="form-control" placeholder="quantity" value =<% if (inventory.quantity) { %><%= inventory.quantity %><% } %>><br>
+                
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="street" class="form-control" placeholder="Street" value =<% if (inventory.address.street) { %><%= inventory.address.street %><% } %>> <br>
+                
+                <label for="building">Building:</label>
+                <input type="text" id="building" name="building" class="form-control" placeholder="Building" value =  <% if (inventory.address.building) { %><%= inventory.address.building %><% } %>><br>
+                
+                <label for="country">City:</label>
+                <input type="text" id="country" name="country" class="form-control" placeholder="country" value =  <% if (inventory.address.country) { %><%= inventory.address.country %><% } %>><br>
+				
+                <label for="zipcode">Zipcode:</label>
+                <input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="Zipcode"  value = <% if (inventory.address.zipcode) { %><%= inventory.address.zipcode %><% } %>><br>
+
+                <label for="latitude">GPS Latitude:</label>
+                <input type="text" id="latitude" name="latitude" class="form-control" placeholder="Latitude"  value =<% if (inventory.address.coord) { %><%= inventory.address.coord[0] %><% } %>><br>
+
+                <label for="longitude">GPS Longitude:</label>
+                <input type="text" id="longitude" name="longitude" class="form-control" placeholder="Longitude"  value =<% if (inventory.address.coord) { %><%= inventory.address.coord[1] %><% } %>><br>
+                
+                <div class="custom-file">
+                    <label class="custom-file-label" for="photo">Update New Photo:</label>
+                    <div class="row" >
+                        <% if (inventory.photo) { %>
+                            <img src="data:image/<%= inventory.photo.mimetype %>;base64, <%= inventory.photo.data %>" alt="<%= inventory.photo.title %>" class="img-thumbnail"><br>
+                        <% } %>
+                    </div>
+                    <input type="file" id="photo" name="photo" class="form-control custom-file-input" placeholder="Photo"><br>
+                </div>
+                <input type="hidden" name="_id" value=<%= inventory._id %>>
+                <input type="hidden" name="owner" value=<%= inventory.owner %>>
+                <button class="btn btn-primary" type="submit"><img src ="public/images/edit.png" width="40" height="40" ></image>Update</button>
+            </form>
+        </div>
+    </body>
+    <script>
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+</html>

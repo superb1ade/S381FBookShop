@@ -1,0 +1,26 @@
+{
+    "name": "server",
+    "description": "COMPS381F project",
+    "author": "Natasha Leung <s1204561@ouhk.edu.hk>",
+    "version": "0.0.1",
+    "engines": {
+        "node": "^14.15.1"
+    },
+    "dependencies": {
+        "assert": "^1.4.1",
+        "body-parser": "^1.18.3",
+        "bootstrap": "^5.2.2",
+        "bootstrap-ui": "^3.1.1",
+        "cookie-session": "^1.4.0",
+        "ejs": "2.6.1",
+        "express": "^4.17.1",
+        "express-formidable": "^1.2.0",
+        "fs": "0.0.1-security",
+        "html": "^1.0.0",
+        "mongodb": "^3.6.3"
+    },
+    "engine": "node >= 12.0.0",
+    "scripts": {
+        "start": "node server.js"
+    }
+}
